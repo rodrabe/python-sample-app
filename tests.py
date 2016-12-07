@@ -14,12 +14,12 @@ import unittest
 
 import webtest
 
-import app
+import testapp
 
 
 class TestCase(unittest.TestCase):
     def test_get(self):
-        app_ = webtest.TestApp(app.app)
-        resp = app_.get('/')
+        app = webtest.TestApp(testapp.application)
+        resp = app.get('/')
         self.assertEqual(200, resp.status_int)
         self.assertIn('Brant', resp.body)

@@ -19,5 +19,5 @@ class _SimpleResource(object):
         resp.body = "Hello from Brant's falcon application!"
 
 
-app = falcon.API()
-app.add_route('/', _SimpleResource())
+application = falcon.API()
+application.add_route('/', _SimpleResource())
