@@ -5,5 +5,5 @@ setup(
     version="0.1",
     description="Example application to be deployed.",
     packages=find_packages(),
-    install_requires=['falcon'],
+    install_requires=['falcon', 'gunicorn'],
 )
