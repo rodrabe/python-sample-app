@@ -22,4 +22,5 @@ class TestCase(unittest.TestCase):
         app = webtest.TestApp(testapp.application)
         resp = app.get('/')
         self.assertEqual(200, resp.status_int)
-        self.assertIn('Brant', resp.body)
+        self.assertEqual('application/json', resp.content_type)
+        self.assertEqual({'message': 'something'}, resp.json)

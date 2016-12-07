@@ -11,12 +11,15 @@
 # under the License.
 
 
+import json
+
 import falcon
 
 
 class _SimpleResource(object):
     def on_get(self, req, resp):
-        resp.body = "Hello from Brant's falcon application!"
+        resp.body = json.dumps({'message': 'something'})
+        resp.set_header('Content-Type', 'application/json')
 
 
 application = falcon.API()
