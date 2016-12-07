@@ -16,10 +16,20 @@ import json
 import falcon
 
 
+MESSAGE = 'something'
+
+
 class _SimpleResource(object):
     def on_get(self, req, resp):
-        resp.body = json.dumps({'message': 'something'})
+        resp.body = json.dumps({'message': MESSAGE})
         resp.set_header('Content-Type', 'application/json')
+
+    def on_put(self, req, resp):
+        global MESSAGE
+
+        doc = json.load(req.stream)
+        MESSAGE = doc['message']
+        resp.body = json.dumps({'message': MESSAGE})
 
 
 application = falcon.API()
