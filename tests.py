@@ -14,11 +14,11 @@ import unittest
 
 import webtest
 
-import testapp
+import app
 
 
 class TestCase(unittest.TestCase):
     def test_get(self):
-        app = webtest.TestApp(testapp.application)
-        resp = app.get('/')
+        app_ = webtest.TestApp(app.application)
+        resp = app_.get('/')
         self.assertEqual(200, resp.status_int)
