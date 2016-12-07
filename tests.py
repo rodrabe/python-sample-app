@@ -10,7 +10,15 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import unittest
 
-def application(environ, start_response):
-    start_response('200 OK', [('Content-Type', 'text/plain')])
-    return [b"Hello from Brant's gunicorn WSGI application!"]
+import webtest
+
+import testapp
+
+
+class TestCase(unittest.TestCase):
+    def test_get(self):
+        app = webtest.TestApp(testapp.application)
+        resp = app.get('/')
+        self.assertEqual(200, resp.status_int)
