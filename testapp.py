@@ -11,6 +11,13 @@
 # under the License.
 
 
-def application(environ, start_response):
-    start_response('200 OK', [('Content-Type', 'text/plain')])
-    return [b"Hello from Brant's gunicorn WSGI application!"]
+import falcon
+
+
+class _SimpleResource(object):
+    def on_get(self, req, resp):
+        resp.body = "Hello from Brant's falcon application!"
+
+
+application = falcon.API()
+application.add_route('/', _SimpleResource())
