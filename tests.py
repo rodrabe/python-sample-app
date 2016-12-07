@@ -19,6 +19,7 @@ import app
 
 class TestCase(unittest.TestCase):
     def test_get(self):
-        app_ = webtest.TestApp(app.application)
+        app_ = webtest.TestApp(app.app)
         resp = app_.get('/')
         self.assertEqual(200, resp.status_int)
+        self.assertIn('Brant', resp.body)
