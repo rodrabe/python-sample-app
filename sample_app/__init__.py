@@ -13,26 +13,29 @@
 import json
 
 import falcon
-
-
-MESSAGE = 'something'
+from oslo_config import cfg
 
 
 class _SimpleResource(object):
+    def __init__(self, conf):
+        self._message = conf.message
+
     def on_get(self, req, resp):
-        resp.body = json.dumps({'message': MESSAGE})
+        resp.body = json.dumps({'message': self._message})
         resp.set_header('Content-Type', 'application/json')
 
     def on_put(self, req, resp):
-        global MESSAGE
-
         doc = json.load(req.stream)
-        MESSAGE = doc['message']
-        resp.body = json.dumps({'message': MESSAGE})
+        self._message = doc['message']
+        resp.body = json.dumps({'message': self._message})
 
 
 def make_application():
+    conf = cfg.ConfigOpts()
+    conf.register_opt(cfg.StrOpt('message', default='something'))
+    conf(args=[], project='testapp')
+
     application = falcon.API()
-    application.add_route('/', _SimpleResource())
+    application.add_route('/', _SimpleResource(conf))
 
     return application

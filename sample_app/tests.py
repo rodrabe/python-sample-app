@@ -10,14 +10,20 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import unittest
-
+import fixtures
+import testtools
 import webtest
 
 import sample_app
 
 
-class TestCase(unittest.TestCase):
+class TestCase(testtools.TestCase):
+    def setUp(self):
+        super(TestCase, self).setUp()
+        fake_config_opts = self.useFixture(fixtures.MockPatchObject(
+            sample_app.cfg, 'ConfigOpts')).mock
+        fake_config_opts().message = 'something'
+
     def test_get(self):
         app = webtest.TestApp(sample_app.make_application())
         resp = app.get('/')
