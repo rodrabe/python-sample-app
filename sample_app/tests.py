@@ -14,26 +14,26 @@ import unittest
 
 import webtest
 
-import testapp
+import sample_app
 
 
 class TestCase(unittest.TestCase):
     def test_get(self):
-        app = webtest.TestApp(testapp.application)
+        app = webtest.TestApp(sample_app.make_application())
         resp = app.get('/')
         self.assertEqual(200, resp.status_int)
         self.assertEqual('application/json', resp.content_type)
         self.assertEqual({'message': 'something'}, resp.json)
 
     def test_put(self):
-        app = webtest.TestApp(testapp.application)
+        app = webtest.TestApp(sample_app.make_application())
         resp = app.put_json('/', {'message': 'a new thing'})
         self.assertEqual(200, resp.status_int)
         self.assertEqual('application/json', resp.content_type)
         self.assertEqual({'message': 'a new thing'}, resp.json)
 
     def test_put_get(self):
-        app = webtest.TestApp(testapp.application)
+        app = webtest.TestApp(sample_app.make_application())
         resp = app.put_json('/', {'message': 'a new thing'})
         self.assertEqual(200, resp.status_int)
         self.assertEqual('application/json', resp.content_type)

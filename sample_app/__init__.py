@@ -10,7 +10,29 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import json
 
-import sample_app
+import falcon
 
-application = sample_app.make_application()
+
+MESSAGE = 'something'
+
+
+class _SimpleResource(object):
+    def on_get(self, req, resp):
+        resp.body = json.dumps({'message': MESSAGE})
+        resp.set_header('Content-Type', 'application/json')
+
+    def on_put(self, req, resp):
+        global MESSAGE
+
+        doc = json.load(req.stream)
+        MESSAGE = doc['message']
+        resp.body = json.dumps({'message': MESSAGE})
+
+
+def make_application():
+    application = falcon.API()
+    application.add_route('/', _SimpleResource())
+
+    return application
