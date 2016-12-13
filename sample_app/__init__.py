@@ -36,7 +36,7 @@ class _SimpleResource(object):
 
 def make_application():
     conf = ConfigParser.RawConfigParser()
-    conf.read(['/etc/sample_app/sample_app.conf'])
+    conf.read(['/etc/sample_app/sample-app.conf'])
 
     application = falcon.API()
     application.add_route('/', _SimpleResource(conf))
