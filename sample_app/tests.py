@@ -20,9 +20,9 @@ import sample_app
 class TestCase(testtools.TestCase):
     def setUp(self):
         super(TestCase, self).setUp()
-        fake_config_opts = self.useFixture(fixtures.MockPatchObject(
-            sample_app.cfg, 'ConfigOpts')).mock
-        fake_config_opts().message = 'something'
+        fake_config_parser = self.useFixture(fixtures.MockPatchObject(
+            sample_app.ConfigParser, 'RawConfigParser')).mock
+        fake_config_parser().get.return_value = 'something'
 
     def test_get(self):
         app = webtest.TestApp(sample_app.make_application())

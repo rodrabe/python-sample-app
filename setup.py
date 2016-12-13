@@ -6,10 +6,8 @@ setup(
     description="Example application to be deployed.",
     packages=find_packages(),
     install_requires=[
-        'setuptools>=17.1',
         'falcon',
         'fixtures',
         'gunicorn',
-        'oslo.config',
     ],
 )

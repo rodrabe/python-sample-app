@@ -11,14 +11,18 @@
 # under the License.
 
 import json
+import ConfigParser
 
 import falcon
-from oslo_config import cfg
 
 
 class _SimpleResource(object):
     def __init__(self, conf):
-        self._message = conf.message
+        try:
+            message = conf.get('sample_app', 'message')
+        except ConfigParser.Error:
+            message = 'something'
+        self._message = message
 
     def on_get(self, req, resp):
         resp.body = json.dumps({'message': self._message})
@@ -31,9 +35,8 @@ class _SimpleResource(object):
 
 
 def make_application():
-    conf = cfg.ConfigOpts()
-    conf.register_opt(cfg.StrOpt('message', default='something'))
-    conf(args=[], project='testapp')
+    conf = ConfigParser.RawConfigParser()
+    conf.read(['/etc/sample_app/sample_app.conf'])
 
     application = falcon.API()
     application.add_route('/', _SimpleResource(conf))
