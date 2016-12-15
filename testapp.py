@@ -11,6 +11,6 @@
 # under the License.
 
 
-from jumpgate import wsgi
+import jumpgate
 
-application = wsgi.make_application()
+application = jumpgate.make_application()
