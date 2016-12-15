@@ -2,22 +2,17 @@ import logging
 import os
 import os.path
 
+from oslo_config import cfg
 
 from jumpgate import api
 from jumpgate import config as jumpgate_config
 
-import ConfigParser
-import json
-
 PROJECT = 'jumpgate'
-
-
 
 
 def make_api(config_path=None):
     # Find configuration files
-    conf = ConfigParser.RawConfigParser()
-    config_files = conf.read([PROJECT])
+    config_files = cfg.find_config_files(PROJECT)
 
     # Check for environmental variable config file
     env_config_loc = os.environ.get('JUMPGATE_CONFIG')
