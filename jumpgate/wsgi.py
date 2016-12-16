@@ -32,9 +32,9 @@ def make_api(config_path=None):
     if not config_files:
         raise Exception('No config files for %s found.' % PROJECT)
 
-    jumpgate_config.CONF(project=PROJECT,
-                         args=[],  # We don't want CLI arguments
-                         default_config_files=config_files)
+    # jumpgate_config.CONF(project=PROJECT,
+    #                      args=[],  # We don't want CLI arguments
+    #                      default_config_files=config_files)
 
     logger = logging.getLogger(PROJECT)
     logger.setLevel(getattr(logging,
