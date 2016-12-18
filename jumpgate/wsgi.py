@@ -29,8 +29,8 @@ def make_api(config_path=None):
     if config_path and os.path.exists(config_path):
         config_files.insert(0, config_path)
 
-    if not config_files:
-        raise Exception('No config files for %s found.' % PROJECT)
+    # if not config_files:
+    #     raise Exception('No config files for %s found.' % PROJECT)
 
     # jumpgate_config.CONF(project=PROJECT,
     #                      args=[],  # We don't want CLI arguments
