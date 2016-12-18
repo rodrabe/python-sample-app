@@ -1,0 +1,91 @@
+from mock import MagicMock
+import unittest
+
+from jumpgate.common.dispatcher import Dispatcher
+
+
+class TestDispatcher(unittest.TestCase):
+    def setUp(self):
+        self.disp = Dispatcher(mount='/mountpoint')
+
+    def test_init(self):
+        self.assertEqual(self.disp._endpoints, {})
+
+    def test_add_endpoint(self):
+        self.disp.add_endpoint('user_page', '/path/to/{tenant_id}')
+
+        self.assertEqual(len(self.disp._endpoints), 1)
+        self.assertEqual(self.disp._endpoints['user_page'],
+                         ('/mountpoint/path/to/{tenant_id}', None))
+
+    def test_set_handler(self):
+        self.disp.add_endpoint('user_page0', '/path0/to/{tenant_id}')
+        handler = MagicMock()
+
+        self.disp.set_handler('user_page0', handler)
+        self.assertEqual(self.disp._endpoints, {
+            'user_page0': ('/mountpoint/path0/to/{tenant_id}', handler)})
+
+        self.assertRaises(
+            ValueError, self.disp.set_handler, 'unknown', handler)
+
+    def test_get_unused_endpoints(self):
+        self.disp.add_endpoint('user_page0', '/path0/to/{tenant_id}')
+        self.disp.add_endpoint('user_page1', '/path1/to/{tenant_id}')
+        self.disp.add_endpoint('user_page2', '/path2/to/{tenant_id}')
+        self.disp.set_handler('user_page0', MagicMock())
+
+        unused_endpoints = self.disp.get_unused_endpoints()
+
+        self.assertEqual(unused_endpoints, ['user_page1', 'user_page2'])
+
+    def test_get_routes(self):
+        self.disp.add_endpoint('user_page0', '/path0/to/{tenant_id}')
+        self.disp.add_endpoint('user_page1', '/path1/to/{tenant_id}')
+        self.disp.add_endpoint('user_page2', '/path2/to/{tenant_id}')
+        handler = MagicMock()
+        self.disp.set_handler('user_page0', handler)
+
+        endpoints = self.disp.get_routes()
+
+        self.assertEqual(endpoints, [
+            ('/mountpoint/path0/to/{tenant_id}', handler),
+        ])
+
+
+class TestDispatcherUrls(unittest.TestCase):
+    def setUp(self):
+        self.disp = Dispatcher()
+
+        self.disp.add_endpoint('user_page', '/path/to/{tenant_id}')
+        self.disp.add_endpoint('instance_detail',
+                               '/path/to/{tenant_id}/{instance_id}')
+
+    def test_get_endpoint_path(self):
+        req = MagicMock()
+        req.env = {'tenant_id': '1234'}
+
+        path = self.disp.get_endpoint_path(req, 'user_page')
+
+        self.assertEqual(path, '/path/to/1234')
+
+        path = self.disp.get_endpoint_path(
+            req, 'instance_detail', instance_id='9876')
+
+        self.assertEqual(path, '/path/to/1234/9876')
+
+    def test_get_endpoint_url(self):
+        req = MagicMock()
+        req.env = {'tenant_id': '1234'}
+        req.protocol = 'http'
+        req.get_header.return_value = 'some_host'
+        req.app = ''
+
+        path = self.disp.get_endpoint_url(req, 'user_page')
+
+        self.assertEqual(path, 'http://some_host/path/to/1234')
+
+        path = self.disp.get_endpoint_url(
+            req, 'instance_detail', instance_id='9876')
+
+        self.assertEqual(path, 'http://some_host/path/to/1234/9876')
