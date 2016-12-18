@@ -13,4 +13,4 @@
 
 from jumpgate import wsgi
 
-application = wsgi.make_application()
+application = wsgi.make_api()
