@@ -1,2 +1,6 @@
 jsonschema
 softlayer
+gunicorn
+falcon
+fixtures
+
