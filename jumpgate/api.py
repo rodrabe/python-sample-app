@@ -12,7 +12,7 @@ from jumpgate.common import exceptions
 from jumpgate.common import hooks
 from jumpgate.common import nyi
 from jumpgate.common import utils
-from jumpgate import config
+from jumpgate.common import config
 
 LOG = logging.getLogger(__name__)
 
@@ -44,7 +44,7 @@ class Request(falcon.request.Request):
 class Jumpgate(object):
 
     def __init__(self):
-        self.config = config.CONF
+        self.config = config.PARSER
         self.installed_modules = {}
         self.hooks = hooks.APIHooks()
 
