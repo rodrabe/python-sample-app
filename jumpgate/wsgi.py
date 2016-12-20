@@ -15,14 +15,8 @@ PROJECT = 'jumpgate'
 
 
 def make_api(config_path=None):
-    # Find configuration files
-    conf = ConfigParser.RawConfigParser()
-    config_files = conf.read()
 
-    # Check for environmental variable config file
-    env_config_loc = os.environ.get('JUMPGATE_CONFIG')
-    if env_config_loc and os.path.exists(env_config_loc):
-        config_files.insert(0, env_config_loc)
+
 
 
 
