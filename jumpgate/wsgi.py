@@ -25,8 +25,12 @@ def make_api(config_path=None):
     logger.setLevel('INFO')
     logger.addHandler(logging.StreamHandler())
     logger.info("PATH CONFIG  AAA%s "% os.getcwd())
+    virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
+    virtualenv = os.path.join(virtenv, 'jumpgate.conf')
 
-    logger.info("PATH CONFIG %s "% os.path.isfile("/opt/app-root/src/jumpgate.conf"))
+    logger.info("PATH CONFIG AAAA %s "% virtualenv)
+
+    logger.info("PATH CONFIG %s "% os.path.isfile(virtualenv))
     app = api.Jumpgate()
     app.load_endpoints()
     app.load_drivers()
