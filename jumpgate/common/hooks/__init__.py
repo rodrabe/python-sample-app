@@ -21,7 +21,7 @@ class APIHooks(object):
             self._loaded = False
 
         def load_hooks(self):
-            LOG.info("PATH %s "% os.path.dirname(os.path.realpath("jumpgate.conf")))
+            LOG.info("PATH %s "% os.path.isfile("jumpgate.conf"))
             LOG.info("GOT HERE %s "% config.PARSER.defaults().__len__())
 
             if not self._loaded:
