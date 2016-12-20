@@ -24,6 +24,7 @@ def make_api(config_path=None):
     logger = logging.getLogger(PROJECT)
     logger.setLevel('INFO')
     logger.addHandler(logging.StreamHandler())
+    logger.info("PATH CONFIG %s "% os.path.isfile("jumpgate.conf"))
     app = api.Jumpgate()
     app.load_endpoints()
     app.load_drivers()
