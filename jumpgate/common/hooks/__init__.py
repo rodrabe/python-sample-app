@@ -20,7 +20,7 @@ class APIHooks(object):
             self._loaded = False
 
         def load_hooks(self):
-            LOG.info("GOT HERE %s "% config.PARSER.defaults().viewitems())
+            LOG.info("GOT HERE %s "% config.PARSER.defaults().__len__())
 
             if not self._loaded:
                 for hook in (['jumpgate.common.hooks.core'] +
