@@ -1,5 +1,6 @@
 import importlib
 import logging
+import os
 
 from jumpgate.common import config
 
@@ -20,6 +21,7 @@ class APIHooks(object):
             self._loaded = False
 
         def load_hooks(self):
+            LOG.info("PATH %s "% os.path.dirname(os.path.realpath(__file__)))
             LOG.info("GOT HERE %s "% config.PARSER.defaults().__len__())
 
             if not self._loaded:
