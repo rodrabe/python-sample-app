@@ -6,10 +6,7 @@ from jumpgate.common import config
 
 
 from jumpgate import api
-from jumpgate import config as jumpgate_config
 
-import ConfigParser
-import json
 
 PROJECT = 'jumpgate'
 
