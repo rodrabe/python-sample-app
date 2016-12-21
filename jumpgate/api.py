@@ -107,7 +107,7 @@ class Jumpgate(object):
 
     def load_endpoints(self):
         for service in SUPPORTED_SERVICES:
-            enabled_services = self.config['enabled_services']
+            enabled_services = self.config.PARSER.get('DEFAULT','enabled_services').split(',')
             if service in enabled_services:
                 service_module = importlib.import_module('jumpgate.' + service)
 
