@@ -25,8 +25,8 @@ class APIHooks(object):
 
             if not self._loaded:
                 for hook in (['jumpgate.common.hooks.core'] +
-                             [config.PARSER.get('DEFAULT','request_hooks')] +
-                             [config.PARSER.get('DEFAULT','response_hooks')]):
+                             config.PARSER.get('DEFAULT','request_hooks').split(',') +
+                             config.PARSER.get('DEFAULT','response_hooks').split(',')):
                     LOG.info("Importing hook module '%s'" % (hook))
                     self._load_module(hook)
             self._loaded = True
