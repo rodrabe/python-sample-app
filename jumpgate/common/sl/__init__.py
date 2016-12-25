@@ -1,20 +1,12 @@
-from oslo_config import cfg
 import SoftLayer
 
 from jumpgate.common.sl import auth
 from jumpgate.common.sl import errors
-
-opts = [
-    cfg.StrOpt('endpoint', default=SoftLayer.API_PUBLIC_ENDPOINT),
-    cfg.StrOpt('catalog_template_file', default='identity.templates'),
-    cfg.StrOpt('catalog_template_file_v3', default='identity_v3.templates'),
-]
-
-cfg.CONF.register_opts(opts, group='softlayer')
+from jumpgate.common import config
 
 
 def hook_get_client(req, resp, kwargs):
-    endpoint = cfg.CONF['softlayer']['endpoint']
+    endpoint = config.PARSER('softlayer','endpoint')
     client = SoftLayer.Client(endpoint_url=endpoint)
     client.auth = None
     req.env['tenant_id'] = None
