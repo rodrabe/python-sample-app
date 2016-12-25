@@ -112,7 +112,7 @@ class Jumpgate(object):
                 service_module = importlib.import_module('jumpgate.' + service)
 
                 # Import the dispatcher for the service
-                mount = self.config[service]['mount']
+                mount = self.config.get(service,'mount')
                 disp = dispatcher.Dispatcher(mount=mount)
                 service_module.add_endpoints(disp)
                 self.add_dispatcher(service, disp)
