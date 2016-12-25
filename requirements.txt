@@ -3,5 +3,5 @@ softlayer
 gunicorn
 falcon
 fixtures
-crypto
+pycrypto
 
