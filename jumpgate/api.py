@@ -122,7 +122,7 @@ class Jumpgate(object):
 
     def load_drivers(self):
         for service, disp in self._dispatchers.items():
-            module = importlib.import_module(self.config[service]['driver'])
+            module = importlib.import_module(self.config.get(service,'driver'))
 
             if hasattr(module, 'setup_routes'):
                 module.setup_routes(self, disp)
