@@ -6,22 +6,22 @@ import time
 from jumpgate.common import aes
 from jumpgate.common import exceptions
 from jumpgate.common import utils
-from jumpgate import config
+from jumpgate.common import config
 
 DEFAULT_TOKEN_DURATION = 60 * 60 * 24
 LOG = logging.getLogger(__name__)
 
 
 def auth_driver():
-    return utils.load_driver(config.CONF['identity']['auth_driver'])
+    return utils.load_driver(config.PARSER.get('identity','auth_driver'))
 
 
 def token_driver():
-    return utils.load_driver(config.CONF['identity']['token_driver'])
+    return utils.load_driver(config.PARSER.get('identity','token_driver'))
 
 
 def token_id_driver():
-    return utils.load_driver(config.CONF['identity']['token_id_driver'])
+    return utils.load_driver(config.PARSER.get('identity','token_id_driver'))
 
 
 def validate_token_id(token_id, user_id=None, username=None, tenant_id=None):
