@@ -9,7 +9,7 @@ from jumpgate.common.sl import auth
 from jumpgate.common import utils
 from jumpgate.identity.drivers import core as identity
 
-from oslo_config import cfg
+from jumpgate.common import config
 import SoftLayer
 
 
@@ -107,8 +107,8 @@ class SLAuthDriver(identity.AuthDriver):
                 raise exceptions.Unauthorized(
                     'Invalid username, password or tenant id')
 
-        endpoint = cfg.CONF['softlayer']['endpoint']
-        proxy = cfg.CONF['softlayer']['proxy']
+        endpoint = config.PARSER.get('softlayer','endpoint')
+        proxy = config.PARSER.get('softlayer','proxy')
         # If the 'password' is the right length, treat it as an API api_key
         if len(credential) == 64:
             client = SoftLayer.Client(username=username,
@@ -166,10 +166,10 @@ class NoAuthDriver(identity.AuthDriver):
         but present for parent-class compatibility.
         """
 
-        endpoint = cfg.CONF['softlayer']['endpoint']
-        proxy = cfg.CONF['softlayer']['proxy']
-        default_user = cfg.CONF['softlayer']['noauth_user']
-        default_api_key = cfg.CONF['softlayer']['noauth_api_key']
+        endpoint = config.PARSER.get('softlayer','endpoint')
+        proxy = config.PARSER.get('softlayer','proxy')
+        default_user = config.PARSER.get('softlayer','noauth_user')
+        default_api_key = config.PARSER.get('softlayer','noauth_api_key')
         client = SoftLayer.Client(username=default_user,
                                   api_key=default_api_key,
                                   endpoint_url=endpoint,
