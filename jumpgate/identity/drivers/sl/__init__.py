@@ -16,7 +16,7 @@ def setup_routes(app, disp):
     disp.set_handler('v3_auth_index', v3.V3(disp))
     disp.set_handler('v3_user_projects', user_projects_v3.UserProjectsV3())
 
-    template_file = app.config.softlayer.catalog_template_file
+    template_file = app.config.get("softlayer","catalog_template_file")
     if not os.path.exists(template_file):
         template_file = app.config.find_file(template_file)
 
