@@ -2,7 +2,7 @@ import base64
 
 from Crypto.Cipher import AES
 
-from jumpgate import config
+from jumpgate.common import config
 
 BLOCK_SIZE = 32
 PADDING = '#'
@@ -13,7 +13,7 @@ def pad(string):
 
 
 def create_cypher():
-    return AES.new(pad(config.CONF['secret_key']))
+    return AES.new(pad(config.PARSER.get('DEFAULT','secret_key')))
 
 
 def encode_aes(string):

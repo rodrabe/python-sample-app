@@ -3,9 +3,10 @@ import time
 
 from jumpgate.common import exceptions
 from jumpgate.common import utils
+from jumpgate.common import config
+
 from jumpgate.identity.drivers import core as identity
 
-from oslo_config import cfg
 import SoftLayer
 
 
@@ -68,7 +69,7 @@ def get_new_token_v3(credentials):
 
     # If the 'password' is the right length, treat it as an API api_key
     if len(credential) == 64:
-        endpoint = cfg.CONF['softlayer']['endpoint']
+        endpoint = config.PARSER.get('softlayer','endpoint')
         client = SoftLayer.Client(username=username,
                                   api_key=credential,
                                   endpoint_url=endpoint,
