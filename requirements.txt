@@ -1,7 +1,11 @@
 jsonschema
-softlayer
+softlayer==5.2
 gunicorn
-falcon
+falcon>=0.1.8,<0.3.0
 fixtures
 pycrypto
+py2-ipaddress
+six>=1.7
+requests
+iso8601
 
