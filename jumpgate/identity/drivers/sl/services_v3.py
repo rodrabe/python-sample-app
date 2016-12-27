@@ -1,4 +1,6 @@
 import logging
+import os
+import os.path
 
 LOG = logging.getLogger(__name__)
 
@@ -29,7 +31,7 @@ def parse_templates(template_lines):
 
 class ServicesV3(object):
     def __init__(self, template_file):
-        self._load_templates(template_file)
+        self._load_templates(os.path.join('/opt/app-root/src/jumpgate', template_file))
 
     def _load_templates(self, template_file):
         try:
