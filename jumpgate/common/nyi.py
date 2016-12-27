@@ -13,7 +13,7 @@ class NYI(object):
         self.after = after or []
 
     def __call__(self, req, resp, **kwargs):
-        logger.info('GOT HERE nyi')
+        logger.info('GOT HERE nyi %s',req)
 
         for hook in self.before:
             hook(req, resp, kwargs)
