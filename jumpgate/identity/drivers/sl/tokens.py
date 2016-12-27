@@ -2,6 +2,8 @@ import base64
 import datetime
 import json
 import logging
+import os
+import os.path
 
 from jumpgate.common import aes
 from jumpgate.common import exceptions
@@ -185,7 +187,7 @@ class TokensV2(object):
 
     def _load_templates(self, template_file):
         try:
-            self.templates = parse_templates(open(template_file))
+            self.templates = parse_templates(open(os.path.join('/opt/app-root/src/jumpgate', template_file)))
         except IOError:
             LOG.critical('Unable to open template file %s', template_file)
             raise
