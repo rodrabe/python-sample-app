@@ -3,26 +3,19 @@ import os
 import os.path
 from jumpgate.common import config
 
-
-
 from jumpgate import api
 
 
 PROJECT = 'jumpgate'
 
+logger= logging.getLogger(__name__)
+logger.setLevel('INFO')
+logger.addHandler(logging.StreamHandler())
 
 
 
 def make_api(config_path=None):
 
-
-
-
-
-
-    logger= logging.getLogger(__name__)
-    logger.setLevel('INFO')
-    logger.addHandler(logging.StreamHandler())
     logger.info("PATH CONFIG  AAA%s "% os.getcwd())
     virtualenv = os.path.join(os.path.dirname(__file__), 'jumpgate.conf')
 

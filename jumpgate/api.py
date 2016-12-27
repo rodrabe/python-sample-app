@@ -44,6 +44,7 @@ class Request(falcon.request.Request):
 class Jumpgate(object):
 
     def __init__(self):
+        LOG.info("GOT HERE JUMPGATE")
         self.config = config.PARSER
         self.installed_modules = {}
         self.hooks = hooks.APIHooks()
