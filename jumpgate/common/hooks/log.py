@@ -7,6 +7,7 @@ LOG = logging.getLogger(__name__)
 
 @hooks.request_hook(True)
 def log_request(req, resp, kwargs):
+    LOG.info('GOT HERE')
     LOG.info('REQ: %s %s %s %s [ReqId: %s]',
              req.method,
              req.path,

@@ -13,6 +13,8 @@ class NYI(object):
         self.after = after or []
 
     def __call__(self, req, resp, **kwargs):
+        logger.info('GOT HERE nyi')
+
         for hook in self.before:
             hook(req, resp, kwargs)
         logger.warning("UNKNOWN PATH: %s %s", req.method, req.path)
