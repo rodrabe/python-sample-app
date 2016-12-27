@@ -14,6 +14,12 @@ class NYI(object):
 
     def __call__(self, req, resp, **kwargs):
         logger.info('GOT HERE nyi %s',req)
+        logger.info('REQ: %s %s %s %s [ReqId: %s]',
+             req.method,
+             req.path,
+             req.query_string,
+             kwargs,
+             req.env['REQUEST_ID'])
 
         for hook in self.before:
             hook(req, resp, kwargs)

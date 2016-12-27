@@ -69,6 +69,7 @@ class Jumpgate(object):
                          request_type=Request)
 
         # Set the default route to the NYI object
+        LOG.info("SELF: %s %s %s", self.default_route, self.before_hooks, self.after_hooks)
         api.add_sink(self.default_route or nyi.NYI(before=self.before_hooks,
                                                    after=self.after_hooks))
 
