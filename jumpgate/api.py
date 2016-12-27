@@ -90,7 +90,7 @@ class Jumpgate(object):
         # Add all the routes collected thus far
         for _, disp in self._dispatchers.items():
             for endpoint, handler in disp.get_routes():
-                LOG.debug("Loading endpoint %s", endpoint)
+                LOG.info("Loading endpoint %s", endpoint)
                 api.add_route(endpoint, handler)
                 api.add_route('%s.json' % endpoint, handler)
 
@@ -109,6 +109,7 @@ class Jumpgate(object):
     def load_endpoints(self):
         for service in SUPPORTED_SERVICES:
             enabled_services = self.config.get('DEFAULT','enabled_services').split(',')
+            LOG.info("service %s enabled %s", service,enabled_services)
             if service in enabled_services:
                 service_module = importlib.import_module('jumpgate.' + service)
 

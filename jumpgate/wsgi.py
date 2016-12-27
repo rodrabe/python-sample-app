@@ -20,7 +20,7 @@ def make_api(config_path=None):
 
 
 
-    logger = logging.getLogger(PROJECT)
+    logger= logging.getLogger(__name__)
     logger.setLevel('INFO')
     logger.addHandler(logging.StreamHandler())
     logger.info("PATH CONFIG  AAA%s "% os.getcwd())
