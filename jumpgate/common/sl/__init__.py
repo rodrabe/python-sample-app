@@ -6,7 +6,7 @@ from jumpgate.common import config
 
 
 def hook_get_client(req, resp, kwargs):
-    endpoint = config.PARSER('softlayer','endpoint')
+    endpoint = config.PARSER.get('softlayer','endpoint')
     client = SoftLayer.Client(endpoint_url=endpoint)
     client.auth = None
     req.env['tenant_id'] = None
