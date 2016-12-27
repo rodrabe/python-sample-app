@@ -2,6 +2,8 @@ import base64
 import datetime
 import json
 import logging
+import os
+import os.path
 
 from jumpgate.common import aes
 from jumpgate.common.sl import auth
