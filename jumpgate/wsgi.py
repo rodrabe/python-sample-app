@@ -2,7 +2,7 @@ import logging
 import os
 import os.path
 from jumpgate.common import config
-import api
+from api import Jumpgate
 
 PROJECT = 'jumpgate'
 
@@ -22,7 +22,7 @@ def make_api(config_path=None):
     config.PARSER.read(virtualenv)
     a = config.PARSER.options('softlayer')
     logger.info("Options %s"% a)
-    app = api.Jumpgate()
+    app = Jumpgate()
     app.load_endpoints()
     app.load_drivers()
 
