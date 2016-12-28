@@ -117,7 +117,7 @@ class Jumpgate(object):
         for service in SUPPORTED_SERVICES:
             enabled_services = self.config.get('DEFAULT','enabled_services').split(',')
             LOG.info("service %s enabled %s", service,enabled_services)
-            if service in enabled_services:
+            if any(service in s for s in enabled_services):
                 service_module = importlib.import_module('jumpgate.' + service)
 
                 # Import the dispatcher for the service
