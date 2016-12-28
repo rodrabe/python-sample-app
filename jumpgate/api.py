@@ -15,6 +15,8 @@ from jumpgate.common import utils
 from jumpgate.common import config
 
 LOG = logging.getLogger(__name__)
+LOG.setLevel('INFO')
+LOG.addHandler(logging.StreamHandler())
 
 SUPPORTED_SERVICES = [
     'baremetal',
