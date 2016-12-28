@@ -2,16 +2,13 @@ import logging
 import os
 import os.path
 from jumpgate.common import config
-
-from jumpgate import api
-
+import api
 
 PROJECT = 'jumpgate'
 
 logger= logging.getLogger(__name__)
 logger.setLevel('INFO')
 logger.addHandler(logging.StreamHandler())
-
 
 
 def make_api(config_path=None):
