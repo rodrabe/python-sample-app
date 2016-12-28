@@ -26,8 +26,8 @@ def make_api(config_path=None):
     app.load_endpoints()
     app.load_drivers()
 
-    Jumpgate.load_endpoints()
-    Jumpgate.load_drivers()
-    Jumpgate.make_api()
+    Jumpgate.load_endpoints(app)
+    Jumpgate.load_drivers(app)
+    Jumpgate.make_api(app)
 
     return app.make_api()

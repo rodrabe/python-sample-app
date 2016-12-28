@@ -63,6 +63,8 @@ class Jumpgate(object):
             self._error_handlers.insert(0, (ex, handler))
 
     def make_api(self):
+        LOG.info("GOT HERE JUMPGATE 2")
+
         self.before_hooks.extend(self.hooks.optional_request_hooks())
         self.after_hooks.extend(self.hooks.optional_response_hooks())
 
@@ -108,6 +110,8 @@ class Jumpgate(object):
         return disp.get_endpoint_url(*args, **kwargs)
 
     def load_endpoints(self):
+        LOG.info("GOT HERE JUMPGATE 3")
+
         for service in SUPPORTED_SERVICES:
             enabled_services = self.config.get('DEFAULT','enabled_services').split(',')
             LOG.info("service %s enabled %s", service,enabled_services)
@@ -124,6 +128,8 @@ class Jumpgate(object):
                 self.installed_modules[service] = False
 
     def load_drivers(self):
+        LOG.info("GOT HERE JUMPGATE 4")
+
         for service, disp in self._dispatchers.items():
             module = importlib.import_module(self.config.get(service,'driver'))
 
