@@ -95,7 +95,7 @@ class Jumpgate(object):
         # Add all the routes collected thus far
         for _, disp in self._dispatchers.items():
             for endpoint, handler in disp.get_routes():
-                LOG.info("Loading endpoint %s", endpoint)
+                LOG.info("Loading endpoint %s %s", endpoint, handler)
                 api.add_route(endpoint, handler)
                 api.add_route('%s.json' % endpoint, handler)
 
