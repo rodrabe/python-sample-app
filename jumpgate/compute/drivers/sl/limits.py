@@ -1,4 +1,4 @@
-from oslo_config import cfg
+from jumpgate.common import config
 
 
 class LimitsV2(object):
@@ -10,19 +10,19 @@ class LimitsV2(object):
 
         limits = {
             'absolute': {
-                'maxImageMeta': cfg.CONF.compute.default_metadata_items,
-                'maxPersonality': cfg.CONF.compute.default_injected_files,
+                'maxImageMeta': config.PARSER.get("compute","default_metadata_items"),
+                'maxPersonality': config.PARSER.get("compute","default_injected_files"),
                 'maxPersonalitySize':
-                cfg.CONF.compute.default_injected_file_content_bytes,
+                config.PARSER.get("compute","default_injected_file_content_bytes"),
                 'maxSecurityGroupRules':
-                cfg.CONF.compute.default_security_group_rules,
-                'maxSecurityGroups': cfg.CONF.compute.default_security_groups,
-                'maxServerMeta': cfg.CONF.compute.default_metadata_items,
-                'maxTotalCores': cfg.CONF.compute.default_cores,
-                'maxTotalFloatingIps': cfg.CONF.compute.default_floating_ips,
-                'maxTotalInstances': cfg.CONF.compute.default_instances,
-                'maxTotalKeypairs': cfg.CONF.compute.default_key_pairs,
-                'maxTotalRAMSize': cfg.CONF.compute.default_ram,
+                config.PARSER.get("compute","default_security_group_rules"),
+                'maxSecurityGroups': config.PARSER.get("compute","default_security_groups"),
+                'maxServerMeta': config.PARSER.get("compute","default_metadata_items"),
+                'maxTotalCores': config.PARSER.get("compute","default_cores"),
+                'maxTotalFloatingIps': config.PARSER.get("compute","default_floating_ips"),
+                'maxTotalInstances': config.PARSER.get("compute","default_instances"),
+                'maxTotalKeypairs': config.PARSER.get("compute","default_key_pairs"),
+                'maxTotalRAMSize': config.PARSER.get("compute","default_ram"),
                 'totalInstancesUsed': account['hourlyVirtualGuestCount'],
                 'totalCoresUsed': 0,
                 'totalRAMUsed': 0,
