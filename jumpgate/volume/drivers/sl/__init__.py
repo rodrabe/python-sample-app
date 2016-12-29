@@ -19,7 +19,7 @@ def setup_routes(app, disp):
     disp.set_handler('v2_volumes_detail', volumesv2.VolumesV2())
     # Load volume type list
 
-    json_file = app.config.volume.volume_types
+    json_file = os.path.join('/opt/app-root/src/jumpgate',app.config.get("volume","volume_types"))
     if not os.path.exists(json_file):
         json_file = app.config.find_file(json_file)
 
