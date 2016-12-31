@@ -123,7 +123,11 @@ class Jumpgate(object):
                 # Import the dispatcher for the service
                 mount = self.config.get(service,'mount')
                 LOG.info('mount: %s', mount)
-                disp = dispatcher.Dispatcher(mount=mount)
+                if '/identity' in mount:
+                    LOG.info("got identity mount")
+                    disp = dispatcher.Dispatcher()
+                else:
+                    disp = dispatcher.Dispatcher(mount=mount)
                 LOG.info('disp: %s', disp)
                 service_module.add_endpoints(disp)
                 self.add_dispatcher(service, disp)
