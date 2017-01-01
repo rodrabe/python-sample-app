@@ -1,4 +1,9 @@
 import falcon
+import logging
+
+LOG = logging.getLogger(__name__)
+LOG.setLevel('INFO')
+LOG.addHandler(logging.StreamHandler())
 
 
 class Versions(object):
@@ -6,6 +11,8 @@ class Versions(object):
         self.disp = disp
 
     def on_get(self, req, resp):
+        LOG.info('GOT HERE VERSION')
+
         resp.status = falcon.HTTP_300
         resp.body = {
             'versions': {
@@ -78,4 +85,7 @@ class Versions(object):
                     }
                 ]
             }
+
         }
+        LOG.info('GOT HERE VERSION EXIT')
+
