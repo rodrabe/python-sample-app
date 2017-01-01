@@ -3,11 +3,13 @@ import logging
 from jumpgate.common import hooks
 
 LOG = logging.getLogger(__name__)
+LOG.setLevel('INFO')
+LOG.addHandler(logging.StreamHandler())
 
 
 @hooks.request_hook(True)
 def log_request(req, resp, kwargs):
-    LOG.info('GOT HERE')
+    LOG.info('GOT HERE HOOK')
     LOG.info('REQ: %s %s %s %s [ReqId: %s]',
              req.method,
              req.path,
