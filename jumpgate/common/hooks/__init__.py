@@ -8,6 +8,8 @@ import imp
 from jumpgate.common import config
 
 LOG = logging.getLogger(__name__)
+LOG.setLevel('INFO')
+LOG.addHandler(logging.StreamHandler())
 
 
 class APIHooks(object):
@@ -43,14 +45,14 @@ class APIHooks(object):
              #                     "Verify it exists in PYTHONPATH" % (module))
 
         def add_request_hook(self, hook, optional=True):
-            LOG.debug("Adding request hook '%s'" % (str(hook)))
+            LOG.info("Adding request hook '%s'" % (str(hook)))
             cache = (self._req_hooks['optional'] if optional
                      else self._req_hooks['required'])
             cache.append(hook)
             return hook
 
         def add_response_hook(self, hook, optional=True):
-            LOG.debug("Adding response hook '%s'" % (str(hook)))
+            LOG.info("Adding response hook '%s'" % (str(hook)))
             cache = (self._res_hooks['optional'] if optional
                      else self._res_hooks['required'])
             cache.append(hook)
@@ -65,10 +67,12 @@ class APIHooks(object):
             return list(self._req_hooks['optional'])
 
         def required_response_hooks(self):
+            LOG.info("Adding required response hook ")
             self.load_hooks()
             return list(self._res_hooks['required'])
 
         def optional_response_hooks(self):
+            LOG.info("Adding optional response hook ")
             self.load_hooks()
             return list(self._res_hooks['optional'])
 
