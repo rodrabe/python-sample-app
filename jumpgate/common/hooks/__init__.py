@@ -40,7 +40,7 @@ class APIHooks(object):
             try:
                 imp.load_source(module, os.path.dirname(__file__))
                 LOG.info("GOT HERE HOOK PATH %s "% os.path.join(os.path.dirname(__file__), module+'.py'))
-                importlib.import_module(os.path.join(os.path.dirname(__file__), module+'.py'))
+                importlib.import_module('jumpgate.common.hooks.'+module)
             except ImportError:
                raise ImportError("Failed to import hook module '%s'. "
                                  "Verify it exists in PYTHONPATH" % (module))
