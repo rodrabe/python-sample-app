@@ -39,8 +39,8 @@ class APIHooks(object):
         def _load_module(self, module):
             try:
                 imp.load_source(module, os.path.dirname(__file__))
-                LOG.info("GOT HERE HOOK PATH %s "% os.path.join(os.path.dirname(__file__), module))
-                importlib.import_module(os.path.join(os.path.dirname(__file__), module))
+                LOG.info("GOT HERE HOOK PATH %s "% os.path.join(os.path.dirname(__file__), module+'.py'))
+                importlib.import_module(os.path.join(os.path.dirname(__file__), module+'.py'))
             except ImportError:
                raise ImportError("Failed to import hook module '%s'. "
                                  "Verify it exists in PYTHONPATH" % (module))
